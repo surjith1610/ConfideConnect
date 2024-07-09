@@ -1,0 +1,193 @@
+openapi: 3.1.0
+info:
+  title:  API
+  version: 1.0.0
+  description: API for managing Events data from the db
+servers:
+  - url: http://localhost:3001
+paths:
+  /Event:
+    get:
+      summary: Retrieve all Events
+      operationId: get-all-events
+      description: Retrieves all the Events from the database
+      responses:
+        200:
+          description: Event's list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+        404:
+          description: Events not found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new Event
+      operationId: create-event
+      description: Create a new Event and add it to db.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        201:
+          description: Event Created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        400:
+          description: Invalid Request payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /Event/{id}:
+    parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID of the Event to retrieve
+          schema:
+            type: integer
+    get:
+      summary: Retrieve a Event by ID
+      operationId: get-event-by-id
+      description: Fetch a Event by its ID
+      responses:
+        200:
+          description: Event retrieved with specified id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        404:
+          description: Event not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update a Event by id
+      operationId: update-event-by-ID
+      description: Update a Event by its id
+    
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        200:
+          description: Event Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        400:
+          description: Invalid Request payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: Event Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete a Event by its id
+      operationId: delete-event-by-id
+      responses:
+        204:
+          description: Event deleted successfully
+        404:
+          description: Event Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          
+
+components:
+  schemas:
+    Event:
+      type: object
+      properties:
+        id:
+          type: integer
+          examples: 
+            - 001
+        name:
+          type: string
+          examples:
+            - Dr. Paul
+        description:
+          type: string
+          examples:
+            - "Sample description for a blog"
+
+        phoneNumber:
+          type: string
+          examples:
+            - "01/01/2024"
+        
+        time:
+          type: string
+          examples:
+            - "14:12:23"
+            
+        streetName:
+          type: string
+          examples: 
+            - "Mardi Gras"
+        city:
+          type: string
+          examples: 
+            - "Boston"
+
+        state:
+          type: string
+          examples:
+            - "MA"
+        country:
+          type: string
+          examples:
+            - "US"
+        zipCode:
+          type: string
+          examples:
+            - "02119"
+          
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - Error1
+        message:
+          type: string
+          examples:
+            - Error encountered
+      required:
+        - message
+

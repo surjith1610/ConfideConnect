@@ -1,0 +1,32 @@
+meta {
+  name: Create LabRequest
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:3002/confideconnect/labrequests
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "labId": "661c2ff36441da0b40d0ecde",
+    "patientId": "661c30156441da0b40d0ece6",
+    "requestName": "hivtest1",
+    "requestDescription": "test1",
+    "labReport": "report1",
+    "notificationEmail": "test1@gmail.com",
+    "notificationPhone": "09876930876",
+    "modifiedTime": "2024-04-12T04:59:27.122Z",
+    "preExistingConditions": ["BP","Diabetes"],
+    "patientAddress": {
+      "street": "1",
+          "city": "2",
+          "state": "3",
+          "country": "4",
+          "zip": "5"
+    }
+  }
+}

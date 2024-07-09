@@ -1,0 +1,27 @@
+meta {
+  name: Create Event
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:3002/confideconnect/events
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Aids Awareness 2",
+    "description": "Aids info",
+    "address": {
+      "street": "abc",
+      "city": "ahhc",
+      "state": "kbgc",
+      "country": "abs",
+      "zip": "02119"
+    },
+    "creatorId": "661c3daf37b05d50d5053034"
+  }
+  
+}

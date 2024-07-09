@@ -1,0 +1,17 @@
+meta {
+  name: Update Blog
+  type: http
+  seq: 8
+}
+
+put {
+  url: http://localhost:3002/confideconnect/blogs/661c5ccbf029fded2ff3ebd5
+  body: json
+  auth: none
+}
+
+body:json {
+   {
+      "name": "HIV update"
+    }
+}

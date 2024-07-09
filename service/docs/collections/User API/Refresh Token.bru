@@ -1,0 +1,15 @@
+meta {
+  name: Refresh Token
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:3002/confideconnect/users/refresh
+  body: json
+  auth: none
+}
+
+body:json {
+  {"refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NjFjMmZmMzY0NDFkYTBiNDBkMGVjZGUiLCJpYXQiOjE3MTMxNTAwMTgsImV4cCI6MTcxMzMyMjgxOH0.SgdMPtcY3QRbHiL14I10svsCzZmljP4T06xaCEpJIhk"}
+}

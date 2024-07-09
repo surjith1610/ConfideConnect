@@ -1,0 +1,16 @@
+meta {
+  name: Login
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:3002/confideconnect/users/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {"username": "patient1",
+  "password": "patient1"}
+}

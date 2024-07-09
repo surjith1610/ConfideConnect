@@ -1,0 +1,16 @@
+meta {
+  name: Filter Events by Creator and EventId
+  type: http
+  seq: 16
+}
+
+get {
+  url: http://localhost:3002/confideconnect/events/filter?creatorId=661c3daf37b05d50d5053034
+  body: none
+  auth: none
+}
+
+query {
+  creatorId: 661c3daf37b05d50d5053034
+  ~eventId: 661c56e837b05d50d505305a
+}

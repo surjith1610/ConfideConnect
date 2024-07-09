@@ -1,0 +1,20 @@
+meta {
+  name: Create Blog
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:3002/confideconnect/blogs
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "HIV",
+    "content": "This is the late stage of HIV infection that occurs when the body's immune system is badly damaged ",
+    "creatorId": "661c3daf37b05d50d5053034"
+  }
+  
+}

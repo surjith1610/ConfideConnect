@@ -1,0 +1,28 @@
+meta {
+  name: Update Lab
+  type: http
+  seq: 11
+}
+
+put {
+  url: http://localhost:3002/confideconnect/labs/661c18e54a11e0ce9d204043
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "labId": "661c18e54a11e0ce9d204043",
+    "name": "labtest3",
+    "phone": "98761234",
+    "address": {
+      "street": "1",
+          "city": "2",
+          "state": "3",
+          "country": "4",
+          "zip": "5"
+    }
+    
+    
+  }
+}

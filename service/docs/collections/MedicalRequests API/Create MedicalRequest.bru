@@ -1,0 +1,25 @@
+meta {
+  name: Create MedicalRequest
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3002/confideconnect/medicalrequests
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "patientId": "661c300f6441da0b40d0ece2",
+      "doctorId": "661c3daf37b05d50d5053034",
+      "requestName": "Checkup2",
+      "requestDescription": "Annual physical examination",
+      "doctorPrescription": "Vitamin supplements",
+      "status": "COMPLETED",
+      "notificationEmail": "doe@example.com",
+      "notificationPhone": "123-456-7890",
+      "preExistingConditions": ["Hypertension", "Diabetes"]
+  }
+}

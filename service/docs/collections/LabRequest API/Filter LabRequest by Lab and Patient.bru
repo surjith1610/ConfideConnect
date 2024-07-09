@@ -1,0 +1,16 @@
+meta {
+  name: Filter LabRequest by Lab and Patient
+  type: http
+  seq: 19
+}
+
+get {
+  url: http://localhost:3002/confideconnect/labrequests/filter/
+  body: none
+  auth: none
+}
+
+query {
+  ~patientId: 661c300f6441da0b40d0ece2
+  ~labId: 661c2ff36441da0b40d0ecde
+}

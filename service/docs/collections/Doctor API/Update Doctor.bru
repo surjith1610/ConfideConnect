@@ -1,0 +1,32 @@
+meta {
+  name: Update Doctor
+  type: http
+  seq: 10
+}
+
+put {
+  url: http://localhost:3002/confideconnect/doctors/661c132a0db809ccca625c7d
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "doctorId" : "661c132a0db809ccca625c7d",
+     "name": "doctortest",
+    "phone": "098765432",
+    "address": {
+      "street": "1",
+          "city": "2",
+          "state": "3",
+          "country": "4",
+          "zip": "5"
+    },
+    "gender": "F",
+    "languagePreference": "english",
+    "dob": "1964-04-12",
+    "qualifications": "MBBS"
+    
+    
+  }
+}

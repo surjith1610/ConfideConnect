@@ -1,0 +1,17 @@
+meta {
+  name: Update Donation
+  type: http
+  seq: 10
+}
+
+put {
+  url: http://localhost:3002/confideconnect/donations/661c5fede9f7b0dfbf063577
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "status":"failed"
+  }
+}

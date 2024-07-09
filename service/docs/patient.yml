@@ -1,0 +1,196 @@
+openapi: 3.1.0
+info:
+  title: Patient API
+  version: 1.0.0
+  description: API for managing patient data
+servers:
+  - url: http://localhost:3001
+paths:
+  /patient:
+    get:
+      summary: Retrieve all patients
+      operationId: get-all-patients
+      description: Retrieves all the patients from the database
+      responses:
+        200:
+          description: Patient's list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Patient'
+        404:
+          description: Patients not found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new patient
+      operationId: create-patient
+      description: Create a new patient and add it to db.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+      responses:
+        201:
+          description: Patient Created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        400:
+          description: Invalid Request payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /patients/{id}:
+    parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID of the patient to retrieve
+          schema:
+            type: integer
+    get:
+      summary: Retrieve a patient by ID
+      operationId: get-patient-by-id
+      description: Fetch a patient by its ID
+      responses:
+        200:
+          description: Patient retrieved with specified id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        404:
+          description: Patient not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update a patient by id
+      operationId: update-patient-by-ID
+      description: Update a patient by its id
+    
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Patient'
+      responses:
+        200:
+          description: Patient Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Patient'
+        400:
+          description: Invalid Request payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: Patient Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete a patient by its id
+      operationId: delete-patient-by-id
+      responses:
+        204:
+          description: Patient deleted successfully
+        404:
+          description: Patient Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          
+
+components:
+  schemas:
+    Patient:
+      type: object
+      properties:
+        id:
+          type: integer
+          examples: 
+            - 001
+        patientId:
+          type: integer
+          examples:
+             - 002
+        userName:
+          type: string
+          examples:
+             - user1
+        password:
+          type: string
+          examples:
+            - pass1234
+        role:
+          type: string
+          examples:
+            - patient
+        gender:
+          type: string
+          examples:
+            - male
+        language:
+          type: array
+          items:
+            type: string
+          examples:
+            - [Tamil, English, French]
+        
+        dateOfBirth:
+          type: string
+          examples:
+            - date
+        preExistingConditions:
+          type: array
+          items:
+            type: string
+          examples:
+            - [Diabetes, BP]
+        labReport:
+          type: string
+          examples: 
+            - "bit.ly"
+        doctorsPrescription:
+          type: string
+          examples: 
+            - "bit.ly"
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - Error1
+        message:
+          type: string
+          examples:
+            - Error encountered
+      required:
+        - message

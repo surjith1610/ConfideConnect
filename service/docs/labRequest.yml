@@ -1,0 +1,279 @@
+openapi: 3.1.0
+info:
+  title: INFO6150 - Web Design and User Experience Engineering Final Project || ConfideConnect
+  summary: The REST service for ConfideConnect.
+  description: An API for providing a centralized space for HIV patients to get connected to labs anonymously
+  version: 'v1.0'
+servers:
+  - url: http://localhost:3001
+
+paths:
+  /labRequests:
+    get:
+      summary: Retrieve all lab requests
+      operationId: get-all-labrequests
+      description: Returns a list of all lab requests.
+      responses:
+        200:
+          description: A list of all lab requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LabRequest'
+        404:
+          description: Lab requests not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new lab request
+      operationId: create-all-labrequests
+      description: Create a new lab request and add it to db.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabRequest'
+      responses:
+        201:
+          description: Lab request created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabRequest'
+        400:
+          description: Invalid request payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete all lab requests
+      operationId: delete-all-labrequests
+      responses:
+        204:
+          description: All lab requests successfully deleted
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /labRequests/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The ID of the lab request to operate on
+        schema:
+          type: integer
+    get:
+      summary: Retrieve a lab request by ID
+      operationId: get-labrequest-by-id
+      description: Returns a lab request by its id.
+      responses:
+        200:
+          description: The lab request retrieved with the specified ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabRequest'
+        404:
+          description: Lab request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update a lab request by ID
+      operationId: update-labrequest-by-id
+      description: Update a lab request by its id.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LabRequest'
+      responses:
+        200:
+          description: Lab request updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LabRequest'
+        404:
+          description: Lab request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        400:
+          description: Invalid request payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete a lab request by ID
+      operationId: delete-labrequest-by-id
+      description: Delete a lab request by its id.
+      responses:
+        204:
+          description: Lab request successfully deleted
+        404:
+          description: Lab request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    LabRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the request
+          examples:
+            - 1
+        patientId:
+          type: integer
+          description: The ID of the patient
+          examples:
+            - 1
+        status:
+          type: string
+          description: The status of the request
+          examples:
+            - Pending
+        notificationRequiredEmail:
+          type: string
+          description: If patient requires notification on email
+          examples:
+            - true
+        notificationRequiredPhone:
+          type: string
+          description: If patient requires notification on phone
+          examples:
+            - true
+        email:
+          type: string
+          description: Patient email
+          examples:
+            - benny@gmail.com
+        phone:
+          type: string
+          description: Patient phone number
+          examples:
+            - 127632468
+        createDate:
+          type: string
+          description: Date on which the request was created
+          examples:
+            - 5/10/12
+        createTime:
+          type: string
+          description: Time at which the request was created
+          examples:
+            - 10pm
+        publishDate:
+          type: string
+          description: Date on which the report was published
+          examples:
+            - 5/10/12
+        publishTime:
+          type: string
+          description: Time at which the report was published
+          examples:
+            - 10pm
+        name:
+          type: string
+          description: Name of the lab
+          examples:
+            - WeCare
+        description:
+          type: string
+          description: Request decsription
+          examples:
+            - test request
+        result:
+          type: string
+          description: Report 
+          examples:
+            - report.ly
+        labId:
+          type: integer
+          description: The ID of the lab associated with the request
+          examples:
+            - 1
+        streetName:
+          type: string
+          description: The street name of the lab
+          examples:
+            - street one
+        city:
+          type: string
+          description: The city of the lab
+          examples:
+            - city one
+        state:
+          type: string
+          description: The state of the lab
+          examples:
+          - state one
+        country:
+          type: string
+          description: The country of the lab
+          examples:
+          - country one
+        zipCode:
+          type: string
+          description: The zip code of the lab
+          examples:
+          - 02119
+      required:
+        - id
+        - patientId
+        - status
+        - notificationRequiredEmail
+        - notificationRequiredPhone
+        - email
+        - phone
+        - createDate
+        - createTime
+        - publishDate
+        - publishTime
+        - name
+        - description
+        - result
+        - labId
+        - streetName
+        - city
+        - state
+        - country
+        - zipCode
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - Error!
+        message:
+          type: string
+          examples:
+            - Error Encountered!!
+      required:
+        - message

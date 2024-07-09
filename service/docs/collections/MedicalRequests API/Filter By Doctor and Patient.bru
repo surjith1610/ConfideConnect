@@ -1,0 +1,16 @@
+meta {
+  name: Filter By Doctor and Patient
+  type: http
+  seq: 7
+}
+
+get {
+  url: http://localhost:3002/confideconnect/medicalrequests/filter/?patientId=661c300f6441da0b40d0ece2&doctorId=661c3daf37b05d50d5053034
+  body: none
+  auth: none
+}
+
+query {
+  patientId: 661c300f6441da0b40d0ece2
+  doctorId: 661c3daf37b05d50d5053034
+}

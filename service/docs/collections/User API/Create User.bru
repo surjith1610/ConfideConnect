@@ -1,0 +1,20 @@
+meta {
+  name: Create User
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3002/confideconnect/users
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "role": "patient",
+      "email": "patient1@gmail.com",
+      "username": "patient1",
+      "password": "patient1"
+  }
+}

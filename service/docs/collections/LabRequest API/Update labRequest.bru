@@ -1,0 +1,39 @@
+meta {
+  name: Update LabRequest
+  type: http
+  seq: 12
+}
+
+put {
+  url: http://localhost:3002/confideconnect/labrequests/661c305e6441da0b40d0eced
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "patientAddress": {
+        "street": "1",
+        "city": "2",
+        "state": "3",
+        "country": "4",
+        "zip": "5"
+      },
+      "_id": "661c305e6441da0b40d0eced",
+      "patientId": "661c30156441da0b40d0ece6",
+      "labId": "661c2ff36441da0b40d0ecde",
+      "requestName": "hivtest2",
+      "requestDescription": "test2",
+      "labReport": "report2",
+      "status": "REQUESTED",
+      "notificationEmail": "test2@gmail.com",
+      "notificationPhone": "098769308276",
+      "modifiedTime": "2024-04-12T04:59:27.122Z",
+      "preExistingConditions": [
+        "BP",
+        "Diabetes"
+      ],
+      "createdDate": "2024-04-14T19:37:02.386Z",
+      "__v": 0
+    }
+}

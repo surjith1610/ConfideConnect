@@ -1,0 +1,223 @@
+openapi: 3.1.0
+info:
+  title: Doctor API
+  version: 1.0.0
+  description: API for managing Doctor data
+servers:
+  - url: http://localhost:3001
+paths:
+  /Doctor:
+    get:
+      summary: Retrieve all Doctors
+      operationId: get-all-doctors
+      description: Retrieves all the Doctors from the database
+      responses:
+        200:
+          description: Doctor's list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Doctor'
+        404:
+          description: Doctors not found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new Doctor
+      operationId: create-Doctor
+      description: Create a new Doctor and add it to db.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Doctor'
+      responses:
+        201:
+          description: Doctor Created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Doctor'
+        400:
+          description: Invalid Request payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /Doctor/{id}:
+    parameters:
+        - in: path
+          name: id
+          required: true
+          description: ID of the Doctor to retrieve
+          schema:
+            type: integer
+    get:
+      summary: Retrieve a Doctor by ID
+      operationId: get-Doctor-by-id
+      description: Fetch a Doctor by its ID
+      responses:
+        200:
+          description: Doctor retrieved with specified id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Doctor'
+        404:
+          description: Doctor not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update a Doctor by id
+      operationId: update-Doctor-by-ID
+      description: Update a Doctor by its id
+    
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Doctor'
+      responses:
+        200:
+          description: Doctor Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Doctor'
+        400:
+          description: Invalid Request payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: Doctor Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete a Doctor by its id
+      operationId: delete-Doctor-by-id
+      responses:
+        204:
+          description: Doctor deleted successfully
+        404:
+          description: Doctor Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          
+
+components:
+  schemas:
+    Doctor:
+      type: object
+      properties:
+        id:
+          type: integer
+          examples: 
+            - 001
+        userName:
+          type: string
+          examples:
+             - user1
+        password:
+          type: string
+          examples:
+            - pass1234
+        role:
+          type: string
+          examples:
+            - Doctor
+        gender:
+          type: string
+          examples:
+            - male
+        language:
+          type: array
+          items:
+            type: string
+          examples:
+            - [Tamil, English, French]
+        
+        name:
+          type: string
+          examples:
+            - Dr. Paul
+        email:
+          type: string
+          examples:
+            - paul@gmail.com
+
+        phoneNumber:
+          type: integer
+          examples:
+            - 09876543210
+            
+        qualifications:
+          type: array
+          items:
+            type: string
+          examples:
+            - [MBBS, MS, MD]
+        certifications:
+          type: array
+          items:
+            type: string
+          examples:
+            - [Cardio, Ortho]
+        streetName:
+          type: string
+          examples: 
+            - "149, centre street"
+        city:
+          type: string
+          examples: 
+            - "Los Angeles"
+
+        state:
+          type: string
+          examples:
+            - "California"
+        country:
+          type: string
+          examples:
+            - "US"
+        zipCode:
+          type: string
+          examples:
+            - "70009"
+          
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - Error1
+        message:
+          type: string
+          examples:
+            - Error encountered
+      required:
+        - message
+

@@ -1,0 +1,25 @@
+meta {
+  name: Update MedicalRequest
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:3002/confideconnect/medicalrequests/661c434137b05d50d505303c
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "patientId": "62bc246e8dabcde987654300",
+      "doctorId": "62bc246e8dabcde123456700",
+      "requestName": "Checkup2",
+      "requestDescription": "Annual physical examination",
+      "doctorPrescription": "Vitamin supplements",
+      "status": "INPROGRESS",
+      "notificationEmail": "doe@example.com",
+      "notificationPhone": "123-456-7890",
+      "preExistingConditions": ["Hypertension", "Diabetes"]
+  }
+}

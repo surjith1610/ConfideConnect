@@ -1,0 +1,20 @@
+meta {
+  name: Update User
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:3002/confideconnect/users/661c0424d44e3e1995fe9521
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "role": "lab",
+      "email": "lab1test@gmail.com",
+      "username": "lab1",
+      "password": "lab1"
+    }
+}

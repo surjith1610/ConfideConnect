@@ -1,0 +1,29 @@
+meta {
+  name: Create Patient
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3002/confideconnect/patients
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "patientId": "66181cb22f2e6b25e07472e6",
+      "name": "Janet Doe",
+      "phone": "123-456-7890",
+      "address": {
+          "street": "1234 Elm St",
+          "city": "Springfield",
+          "state": "IL",
+          "country": "USA",
+          "zip": "62704"
+      },
+      "gender": "Male",
+      "languagePreference": "English",
+      "dob": "1990-01-01"
+  }
+}

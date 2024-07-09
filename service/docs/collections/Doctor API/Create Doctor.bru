@@ -1,0 +1,30 @@
+meta {
+  name: Create Doctor
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3002/confideconnect/doctors
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "doctorId" : "6618a990dffbaa23ca008896",
+     "name": "doctor4",
+    "phone": "This is my third notes",
+    "address": {
+      "street": "1",
+          "city": "2",
+          "state": "3",
+          "country": "4",
+          "zip": "5"
+    },
+    "gender": "F",
+    "languagePreference": "third notes",
+    "dob": "1964-04-12T04:59:27.122Z",
+    "qualifications": "ActionItem1, ActionItem2"
+  }
+}

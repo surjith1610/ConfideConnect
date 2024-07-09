@@ -1,0 +1,25 @@
+meta {
+  name: Update Event
+  type: http
+  seq: 9
+}
+
+put {
+  url: http://localhost:3002/confideconnect/events/661c56e837b05d50d505305a
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Aids Awareness check",
+    "description": "Aids info",
+    "address": {
+      "street": "abc",
+      "city": "amc",
+      "state": "MA",
+      "country": "abs",
+      "zip": "02119"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+meta {
+  name: Filter Donation by DonationId
+  type: http
+  seq: 15
+}
+
+get {
+  url: http://localhost:3002/confideconnect/donations/filter?donationId=661c5fede9f7b0dfbf063577
+  body: none
+  auth: none
+}
+
+query {
+  donationId: 661c5fede9f7b0dfbf063577
+}

@@ -1,0 +1,189 @@
+openapi: 3.1.0
+info:
+  title: INFO6150 - Web Design and User Experience Engineering Final Project || ConfideConnect
+  summary: The REST service for ConfideConnect.
+  description: An API for managing Blog Posts related to HIV
+  version: 'v1.0'
+servers:
+  - url: http://localhost:3001
+
+paths:
+  /blog:
+    get:
+      summary: Retrieve all blogs
+      operationId: get-all-blogs
+      description: Returns a list of all blogs.
+      responses:
+        200:
+          description: A list of all blogs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Blog'
+        404:
+          description: Blogs not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new Blog
+      operationId: create-blog
+      description: Create a new Blog and add it to db.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Blog'
+      responses:
+        201:
+          description: Blog created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Blog'
+        400:
+          description: Invalid request payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete all blogs
+      operationId: delete-blogs
+      responses:
+        204:
+          description: All blogs successfully deleted
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /blog/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The ID of the blog to operate on
+        schema:
+          type: integer
+    get:
+      summary: Retrieve a blog by ID
+      operationId: get-blog-by-id
+      description: Returns a blog by its id.
+      responses:
+        200:
+          description: The blog retrieved with the specified ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Blog'
+        404:
+          description: blog not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update a blog by ID
+      operationId: update-blog-by-id
+      description: Update a blog by its id.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Blog'
+      responses:
+        200:
+          description: blog updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Blog'
+        404:
+          description: blog not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        400:
+          description: Invalid request payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete a blog by ID
+      operationId: delete-blog-by-id
+      description: Delete a blog by its id.
+      responses:
+        204:
+          description: blog successfully deleted
+        404:
+          description: blog not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Blog:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the blog
+          examples:
+            - 1
+        name:
+          type: string
+          description: Name of the blog
+          examples:
+            - How I managed my daily life
+        description:
+          type: string
+          description: Blog decsription
+          examples:
+            - How I managed my daily life with a full time job and my medicines
+        date:
+          type: string
+          description: Date on which the blog was published
+          examples:
+            - 5/10/12
+        time:
+          type: string
+          description: Time at which the blog was published
+          examples:
+            - 10pm
+      required:
+        - id
+        - name
+        - description
+        - date
+        - time
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - Error!
+        message:
+          type: string
+          examples:
+            - Error Encountered!!
+      required:
+        - message

@@ -1,0 +1,19 @@
+meta {
+  name: Create Donation
+  type: http
+  seq: 6
+}
+
+post {
+  url: http://localhost:3002/confideconnect/donations
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Donationq",
+    "amount": "60",
+    "status":"success"
+  }
+}

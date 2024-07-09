@@ -1,0 +1,249 @@
+openapi: 3.1.0
+info:
+  title: INFO6150 - Web Design and User Experience Engineering Final Project || ConfideConnect
+  summary: The REST service for ConfideConnect.
+  description: An API for providing a centralized space for HIV patients to get connected to doctors anonymously
+  version: 'v1.0'
+servers:
+  - url: http://localhost:3001
+
+paths:
+  /medicalRequest:
+    get:
+      summary: Retrieve all medical requests
+      operationId: get-all-medicalrequests
+      description: Returns a list of all medical requests.
+      responses:
+        200:
+          description: A list of all medical requests
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MedicalRequest'
+        404:
+          description: Medical requests not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new medical request
+      operationId: create-all-medicalrequests
+      description: Create a new medical request and add it to db.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicalRequest'
+      responses:
+        201:
+          description: Medical request created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalRequest'
+        400:
+          description: Invalid request payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete all medical requests
+      operationId: delete-all-medicalrequests
+      responses:
+        204:
+          description: All medical requests successfully deleted
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /medicalRequests/{id}:
+    parameters:
+      - in: path
+        name: id
+        required: true
+        description: The ID of the medical request to operate on
+        schema:
+          type: integer
+    get:
+      summary: Retrieve a medical request by ID
+      operationId: get-medicalrequest-by-id
+      description: Returns a medical request by its id.
+      responses:
+        200:
+          description: The medical request retrieved with the specified ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalRequest'
+        404:
+          description: Medical request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update a medical request by ID
+      operationId: update-medicalrequest-by-id
+      description: Update a medical request by its id.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MedicalRequest'
+      responses:
+        200:
+          description: Medical request updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MedicalRequest'
+        404:
+          description: Medical request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        400:
+          description: Invalid request payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Delete a medical request by ID
+      operationId: delete-medicalrequest-by-id
+      description: Delete a medical request by its id.
+      responses:
+        204:
+          description: medical request successfully deleted
+        404:
+          description: Medical request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    MedicalRequest:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The ID of the request
+          examples:
+            - 1
+        patientId:
+          type: integer
+          description: The ID of the patient
+          examples:
+            - 1
+        status:
+          type: string
+          description: The status of the request
+          examples:
+            - Pending
+        notificationRequiredEmail:
+          type: string
+          description: If patient requires notification on email
+          examples:
+            - true
+        notificationRequiredPhone:
+          type: string
+          description: If patient requires notification on phone
+          examples:
+            - true
+        email:
+          type: string
+          description: Patient email
+          examples:
+            - benny@gmail.com
+        phone:
+          type: string
+          description: Patient phone number
+          examples:
+            - 127632468
+        createDate:
+          type: string
+          description: Date on which the request was created
+          examples:
+            - 5/10/12
+        createTime:
+          type: string
+          description: Time at which the request was created
+          examples:
+            - 10pm
+        publishDate:
+          type: string
+          description: Date on which the report was published
+          examples:
+            - 5/10/12
+        publishTime:
+          type: string
+          description: Time at which the report was published
+          examples:
+            - 10pm
+        name:
+          type: string
+          description: Name of the medical doctor
+          examples:
+            - WeCare
+        description:
+          type: string
+          description: Request decsription
+          examples:
+            - test request
+        result:
+          type: string
+          description: Report 
+          examples:
+            - report.ly
+        doctorId:
+          type: integer
+          description: The ID of the medical doctor associated with the request
+          examples:
+            - 1
+      required:
+        - id
+        - patientId
+        - status
+        - notificationRequiredEmail
+        - notificationRequiredPhone
+        - email
+        - phone
+        - createDate
+        - createTime
+        - publishDate
+        - publishTime
+        - name
+        - description
+        - result
+        - doctorId
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - Error!
+        message:
+          type: string
+          examples:
+            - Error Encountered!!
+      required:
+        - message
