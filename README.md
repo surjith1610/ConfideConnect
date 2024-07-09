@@ -12,12 +12,6 @@ ConfideConnect is a platform that can be used by the United Nations to connect w
 5. Locator: Get access to the local testing centers.
 6. Donation: philanthropists will be able to donate money through this platform for United Nations which can be utilized for the social issues.
 
-## Team Details
-1. Chethana Benny - benny.c@northeastern.edu
-2. Surjith Senthil kumar - senthilkumar.sur@northeastern.edu
-3. Panangipalli Naga Venkata Kanaka Satya Harika - panangipalli.n@northeastern.edu
-4. Sri Kalyani Sindhura Vajapeyayajula - vajapeyayajula.s@northeastern.edu
-
 ## Object Model Diagram:
 
 ```mermaid
